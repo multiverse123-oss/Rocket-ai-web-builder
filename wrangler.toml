@@ -1,5 +1,5 @@
-#:schema node_modules/wrangler/config-schema.json
-name = "bolt"
+name = "ai-builder-hub" # It's best to use the name mentioned in the error to ensure consistency
 compatibility_flags = ["nodejs_compat"]
 compatibility_date = "2024-07-01"
 pages_build_output_dir = "./build/client"
+account_id = "YOUR_ACCOUNT_ID_HERE" # <-- This is the crucial missing line
