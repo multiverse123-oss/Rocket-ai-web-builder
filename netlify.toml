@@ -5,13 +5,7 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Remix-specific routing for SPA
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Handle Remix's built assets
+# Handle static assets FIRST (specific rules)
 [[redirects]]
   from = "/build/*"
   to = "/build/:splat"
@@ -22,7 +16,7 @@
   to = "/assets/:splat"
   status = 200
 
-# Handle favicon and other common static files
+# Handle common static files
 [[redirects]]
   from = "/favicon.ico"
   to = "/favicon.ico"
@@ -31,4 +25,15 @@
 [[redirects]]
   from = "/robots.txt"
   to = "/robots.txt"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+# SPA fallback for client-side routing LAST (catch-all rule)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
