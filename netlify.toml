@@ -5,25 +5,30 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Remix requires special handling for SPA routing
-[[redirects]]
-  from = "/app/*"
-  to = "/app/index.html"
-  status = 200
-
+# Remix-specific routing for SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Handle Remix build assets
+# Handle Remix's built assets
 [[redirects]]
   from = "/build/*"
   to = "/build/:splat"
   status = 200
 
-# For Remix API routes if you have them
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+# Handle favicon and other common static files
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/favicon.ico"
+  status = 200
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
   status = 200
