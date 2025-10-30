@@ -1,9 +1,10 @@
 [build]
-  command = "npm run build"
-  publish = "build"  # ← Changed from "build/client" to "build"
+  command = "pnpm run build"
+  publish = "build/client"
 
 [build.environment]
   NODE_VERSION = "18"
+  PNPM_VERSION = "9.4.0"
 
 # Handle static assets FIRST (specific rules)
 [[redirects]]
