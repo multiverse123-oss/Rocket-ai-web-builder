@@ -12,25 +12,27 @@ export default defineConfig((config) => {
       rollupOptions: {
         output: {
           manualChunks(id) {
+            // Split massive syntax bundles - ADDED OPTIMIZATION
+            if (id.includes('codemirror') || id.includes('@codemirror')) {
+              return 'vendor-codemirror';
+            }
+            if (id.includes('shiki') || id.includes('@shikijs')) {
+              return 'vendor-syntax';
+            }
+            if (id.includes('xterm') || id.includes('@xterm')) {
+              return 'vendor-terminal';
+            }
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            
+            // Your existing chunking logic
             if (id.includes('node_modules')) {
-              // Group large dependencies that are likely to be used together
-              if (id.includes('@codemirror')) {
-                return 'vendor-codemirror';
-              }
               if (id.includes('@remix-run') || id.includes('react-router')) {
                 return 'vendor-remix';
               }
-              if (id.includes('react') || id.includes('react-dom')) {
-                return 'vendor-react';
-              }
-              if (id.includes('@xterm') || id.includes('xterm')) {
-                return 'vendor-xterm';
-              }
               if (id.includes('@radix-ui')) {
                 return 'vendor-radix';
-              }
-              if (id.includes('shiki') || id.includes('@lezer')) {
-                return 'vendor-syntax';
               }
               if (id.includes('framer-motion')) {
                 return 'vendor-animation';
@@ -45,8 +47,8 @@ export default defineConfig((config) => {
           }
         }
       },
-      // Increase chunk size warning limit
-      chunkSizeWarningLimit: 800,
+      // Increased chunk size warning limit
+      chunkSizeWarningLimit: 1000,
     },
     plugins: [
       nodePolyfills({
